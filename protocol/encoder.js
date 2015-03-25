@@ -52,9 +52,9 @@ function aliveRequest(port, nodeName) {
   offset = 1;
   req.writeUInt16BE(port, offset);
   offset = 3;
-  req.writeUInt8(constants.NODE_TYPE, offset);
+  req.writeUInt8(constants.NODE_TYPE_NORMAL, offset);
   offset = 4;
-  req.writeUInt8(constants.PROTOCOL, offset);
+  req.writeUInt8(constants.PROTOCOL_IPV4, offset);
   offset = 5;
   req.writeUInt16BE(constants.HIGHEST_VERSION, offset);
   offset = 7;

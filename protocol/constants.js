@@ -13,8 +13,9 @@ exports.ALIVE_REQ = 120;
 exports.ALIVE_RESP = 121;
 exports.PORT_PLEASE2_REQ = 122;
 
-exports.NODE_TYPE = 77;
-exports.PROTOCOL = 0;
+exports.NODE_TYPE_NORMAL = 77;
+exports.NODE_TYPE_HIDDEN = 72;
+exports.PROTOCOL_IPV4 = 0;
 exports.HIGHEST_VERSION = 5;
 exports.LOWEST_VERSION = 5;
 

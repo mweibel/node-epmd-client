@@ -10,7 +10,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha test"
+    "test": "node -harmony_classes ./node_modules/.bin/_mocha test"
   },
   "keywords": [
     "erlang",

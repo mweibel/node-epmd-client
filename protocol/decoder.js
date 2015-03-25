@@ -112,6 +112,8 @@ function decodePortResponse(buf) {
   return {
     code: constants.PORT2_RESP,
     data: {
+      nodeType: nodeType,
+      protocol: protocol,
       port: portNo,
       name: nodeName,
       extra: extra
