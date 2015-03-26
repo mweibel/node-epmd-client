@@ -1,3 +1,4 @@
 .nvmrc
 .idea
 node_modules
+coverage
