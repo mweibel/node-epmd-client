@@ -60,14 +60,16 @@ describe('decoder', function() {
         actual.data.creation.equals(buf.slice(2)).should.equal(true);
       });
 
-      it('should throw a DecoderError with a error response', function() {
+      it('should throw a DecoderError with a error response', function(done) {
         let buf = createAliveResp(1);
 
         // somehow the .should.throw() doesn't seem to work ;(
         try {
           decoder.decode(buf);
           should.fail('no error was thrown');
-        } catch(e) {}
+        } catch(e) {
+          done();
+        }
       });
     });
 
@@ -86,19 +88,21 @@ describe('decoder', function() {
         actual.data.extra.equals(new Buffer(0)).should.equal(true);
       });
 
-      it('should throw a DecoderError with an error response', function() {
+      it('should throw a DecoderError with an error response', function(done) {
         let port = 1337;
         let nodeName = "testing";
-        let buf = createPort2Resp(0, nodeName, port, constants.HIGHEST_VERSION, constants.LOWEST_VERSION);
+        let buf = createPort2Resp(1, nodeName, port, constants.HIGHEST_VERSION, constants.LOWEST_VERSION);
 
         // somehow the .should.throw() doesn't seem to work ;(
         try {
           decoder.decode(buf);
           should.fail('no error was thrown');
-        } catch(e) {}
+        } catch(e) {
+          done();
+        }
       });
 
-      it('should throw a DecoderError if highestVersion < LOWEST_VERSION', function() {
+      it('should throw a DecoderError if highestVersion < LOWEST_VERSION', function(done) {
         let port = 1337;
         let nodeName = "testing";
         let buf = createPort2Resp(0, nodeName, port, 0, constants.LOWEST_VERSION);
@@ -107,10 +111,12 @@ describe('decoder', function() {
         try {
           decoder.decode(buf);
           should.fail('no error was thrown');
-        } catch(e) {}
+        } catch(e) {
+          done();
+        }
       });
 
-      it('should throw a DecoderError if lowestVersion > HIGHEST_VERSION', function() {
+      it('should throw a DecoderError if lowestVersion > HIGHEST_VERSION', function(done) {
         let port = 1337;
         let nodeName = "testing";
         let buf = createPort2Resp(0, nodeName, port, constants.HIGHEST_VERSION, 10);
@@ -119,7 +125,9 @@ describe('decoder', function() {
         try {
           decoder.decode(buf);
           should.fail('no error was thrown');
-        } catch(e) {}
+        } catch(e) {
+          done();
+        }
       });
     });
 
