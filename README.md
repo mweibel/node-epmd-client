@@ -1,6 +1,6 @@
 # node-epmd-client
 
-[![Build Status](https://travis-ci.org/mweibel/node-epmd-client.png)](https://travis-ci.org/mweibel/node-epmd-client)
+[![Build Status](https://travis-ci.org/mweibel/node-epmd-client.svg)](https://travis-ci.org/mweibel/node-epmd-client)
 
 [EPMD](http://www.erlang.org/doc/man/epmd.html) is the abbreviation for **Erlang Port Mapper Daemon** and
 this is a client implementing the [EPMD protocol](http://www.erlang.org/doc/apps/erts/erl_dist_protocol.html).
