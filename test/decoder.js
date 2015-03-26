@@ -4,9 +4,11 @@
 "use strict";
 
 let mocha = require('mocha');
-let should = require('should');
 let describe = mocha.describe;
 let it = mocha.it;
+let chai = require('chai');
+let expect = chai.expect;
+let should = chai.should();
 
 let decoder = require('../protocol/decoder');
 let constants = require('../protocol/constants');
@@ -60,16 +62,12 @@ describe('decoder', function() {
         actual.data.creation.equals(buf.slice(2)).should.equal(true);
       });
 
-      it('should throw a DecoderError with a error response', function(done) {
+      it('should throw a DecoderError with a error response', function() {
         let buf = createAliveResp(1);
 
-        // somehow the .should.throw() doesn't seem to work ;(
-        try {
+        expect(function() {
           decoder.decode(buf);
-          should.fail('no error was thrown');
-        } catch(e) {
-          done();
-        }
+        }).to.throw();
       });
     });
 
@@ -88,46 +86,35 @@ describe('decoder', function() {
         actual.data.extra.equals(new Buffer(0)).should.equal(true);
       });
 
-      it('should throw a DecoderError with an error response', function(done) {
+      it('should throw a DecoderError with an error response', function() {
         let port = 1337;
         let nodeName = "testing";
         let buf = createPort2Resp(1, nodeName, port, constants.HIGHEST_VERSION, constants.LOWEST_VERSION);
 
-        // somehow the .should.throw() doesn't seem to work ;(
-        try {
+        expect(function() {
           decoder.decode(buf);
-          should.fail('no error was thrown');
-        } catch(e) {
-          done();
-        }
+        }).to.throw();
       });
 
-      it('should throw a DecoderError if highestVersion < LOWEST_VERSION', function(done) {
+      it('should throw a DecoderError if highestVersion < LOWEST_VERSION', function() {
         let port = 1337;
         let nodeName = "testing";
         let buf = createPort2Resp(0, nodeName, port, 0, constants.LOWEST_VERSION);
 
-        // somehow the .should.throw() doesn't seem to work ;(
-        try {
-          decoder.decode(buf);
-          should.fail('no error was thrown');
-        } catch(e) {
-          done();
-        }
+        expect(function() {
+          decoder.decode(buf)
+        }).to.throw();
       });
 
-      it('should throw a DecoderError if lowestVersion > HIGHEST_VERSION', function(done) {
+      it('should throw a DecoderError if lowestVersion > HIGHEST_VERSION', function() {
         let port = 1337;
         let nodeName = "testing";
         let buf = createPort2Resp(0, nodeName, port, constants.HIGHEST_VERSION, 10);
 
-        // somehow the .should.throw() doesn't seem to work ;(
-        try {
-          decoder.decode(buf);
-          should.fail('no error was thrown');
-        } catch(e) {
-          done();
-        }
+
+        expect(function() {
+          decoder.decode(buf)
+        }).to.throw();
       });
     });
 
@@ -167,6 +154,16 @@ describe('decoder', function() {
         actual[2].name.should.equal('hehehe');
         actual[2].port.should.equal(596);
         should.not.exist(actual[2].fd);
+      });
+
+      it('should not decode a empty/wrong NAMES_RESP message', function() {
+        let nodes = [
+          ' '
+        ];
+        let buf = createNamesOrDumpResp(nodes);
+
+        let actual = decoder.decode(buf);
+        actual.length.should.equal(0);
       });
     });
 

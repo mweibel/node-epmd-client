@@ -4,7 +4,7 @@
 "use strict";
 
 let mocha = require('mocha');
-let should = require('should');
+let should = require('chai').should();
 let describe = mocha.describe;
 let it = mocha.it;
 
