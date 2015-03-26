@@ -1,5 +1,5 @@
 {
-  "name": "node-epmd-client",
+  "name": "epmd-client",
   "version": "0.0.1",
   "description": "Node.js EPMD client",
   "homepage": "https://github.com/mweibel/node-epmd-client",
