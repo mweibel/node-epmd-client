@@ -11,7 +11,7 @@
   "main": "index.js",
   "scripts": {
     "test": "epmd -daemon && node -harmony_classes ./node_modules/.bin/_mocha test",
-    "test-coveralls": "epmd -daemon && node -harmony_classes ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test-coveralls": "node -harmony_classes ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "keywords": [
     "erlang",
