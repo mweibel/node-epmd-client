@@ -1,5 +1,8 @@
 language: node_js
 node_js:
   - "iojs"
-install: apt-get install erlang
+sudo: required
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y erlang
 script: npm run test-coveralls
