@@ -111,7 +111,6 @@ describe('decoder', function() {
         let nodeName = "testing";
         let buf = createPort2Resp(0, nodeName, port, constants.HIGHEST_VERSION, 10);
 
-
         expect(function() {
           decoder.decode(buf)
         }).to.throw();
