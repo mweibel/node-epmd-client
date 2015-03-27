@@ -152,4 +152,92 @@ class Client extends EventEmitter {
   }
 }
 
-module.exports = Client;
+exports.Client = Client;
+
+/**
+ * Gets a node information (name, port) from EPMD.
+ *
+ * Callback needs to be in the form of:
+ * ```
+ * function(err, node) {
+ * }
+ * ```
+ *
+ * @param {String} host - EPMD Host
+ * @param {number} epmdPort - EPMD Port
+ * @param {String} name - Target node name
+ * @param {Function} cb
+ */
+exports.getNode = function getNode(host, epmdPort, name, cb) {
+  let c = new Client(host, epmdPort);
+  c.on('connect', function() {
+    c.getNode(name);
+  });
+  c.on('node', function(node) {
+    c.end();
+    cb(null, node);
+  });
+  c.on('error', function(err) {
+    c.end();
+    cb(err);
+  });
+  c.connect();
+};
+
+/**
+ * Gets all nodes which live on a server from EPMD.
+ *
+ * Callback needs to be in the form of:
+ * ```
+ * function(err, nodes) {
+ * }
+ * ```
+ *
+ * @param {String} host - EPMD Host
+ * @param {number} epmdPort - EPMD Port
+ * @param {Function} cb
+ */
+exports.getAllNodes = function getAllNodes(host, epmdPort, cb) {
+  let c = new Client(host, epmdPort);
+  c.on('connect', function() {
+    c.getAllNodes();
+  });
+  c.on('nodeinfo', function(nodes) {
+    c.end();
+    cb(null, nodes);
+  });
+  c.on('error', function(err) {
+    c.end();
+    cb(err);
+  });
+  c.connect();
+};
+
+/**
+ * Dumps all nodes which live on a server from EPMD.
+ *
+ * Callback needs to be in the form of:
+ * ```
+ * function(err, nodes) {
+ * }
+ * ```
+ *
+ * @param {String} host - EPMD Host
+ * @param {number} epmdPort - EPMD Port
+ * @param {Function} cb
+ */
+exports.dumpEpmd = function dumpEpmd(host, epmdPort, cb) {
+  let c = new Client(host, epmdPort);
+  c.on('connect', function() {
+    c.dumpEpmd();
+  });
+  c.on('nodeinfo', function(nodes) {
+    c.end();
+    cb(null, nodes);
+  });
+  c.on('error', function(err) {
+    c.end();
+    cb(err);
+  });
+  c.connect();
+};

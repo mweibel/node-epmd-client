@@ -2,7 +2,7 @@
 
 let net = require('net');
 let debug = require('debug')('node-epmd:server');
-let Client = require('./../index');
+let client = require('./../index');
 
 const EPMD_PORT = 4369;
 
@@ -21,7 +21,7 @@ class Server {
 
     // setup an epmd client in order to register
     // itself with the name & port
-    this.epmdClient = new Client(this.host, EPMD_PORT);
+    this.epmdClient = new client.Client(this.host, EPMD_PORT);
 
     this.epmdClient.on('connect', function() {
       // register port & name on epmd
@@ -41,13 +41,11 @@ class Server {
     // in order to get the port of another node
     // we need a new connection
     // because on an ALIVE socket you're not supposed to send anything else.
-    let c = new Client(host, 4369);
-
-    c.on('connect', function() {
-      // get node name as soon as the client has been connected
-      c.getNode(name);
-    });
-    c.on('node', function(node) {
+    client.getNode(host, 4369, name, function(err, node) {
+      if(err) {
+        console.error(err);
+        return;
+      }
       console.log(node.data.name + ' listens on port ' + node.data.port);
 
       // connect to the retrieved port
@@ -59,22 +57,17 @@ class Server {
         debug('connected to ' + name);
       });
     });
-
-    c.connect();
   }
 
   // get all nodes lists all available nodes
   getAllNodes() {
-    let c = new Client(this.host, 4369);
-    let self = this;
-    c.on('connect', function() {
-      c.getAllNodes();
-    });
-    c.on('nodeinfo', function(nodes) {
+    client.getAllNodes(this.host, 4369, function(err, nodes) {
+      if(err) {
+        console.error(err);
+        return;
+      }
       console.log(nodes);
     });
-
-    c.connect();
   }
 
   _onData(data) {
