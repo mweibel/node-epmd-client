@@ -19,4 +19,4 @@ exports.PROTOCOL_IPV4 = 0;
 exports.HIGHEST_VERSION = 5;
 exports.LOWEST_VERSION = 5;
 
-exports.NODE_REGEXP = /.*name.*\W(\w+)\W.*at port (\d+)(, fd = (\d+))?.*/i;
+exports.NODE_REGEXP = /.*name\s*<?([^>\s]+)>?\s.*at port (\d+)(, fd = (\d+))?.*/i;
