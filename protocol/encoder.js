@@ -3,7 +3,7 @@
  *
  * @see http://www.erlang.org/doc/apps/erts/erl_dist_protocol.html
  */
-"use strict";
+'use strict';
 
 let constants = require('./constants');
 

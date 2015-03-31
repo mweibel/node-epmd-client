@@ -3,7 +3,7 @@
  *
  * @see http://www.erlang.org/doc/apps/erts/erl_dist_protocol.html
  */
-"use strict";
+'use strict';
 
 let constants = require('./constants');
 
@@ -54,7 +54,7 @@ exports.decode = function decode(buf) {
 function decodeAliveResponse(buf) {
   let result = buf.readUInt8(1);
   if(result > 0) {
-    throw new DecoderError("EPMD returned an error. Result: '" + result + "'")
+    throw new DecoderError('EPMD returned an error. Result: "' + result + '"');
   }
 
   return {
@@ -81,7 +81,7 @@ function decodeAliveResponse(buf) {
 function decodePortResponse(buf) {
   let result = buf.readUInt8(1);
   if(result > 0) {
-    throw new DecoderError("EPMD returned an error. Result: '" + result + "'")
+    throw new DecoderError('EPMD returned an error. Result: "' + result + '"');
   }
 
   let offset = 2;
@@ -101,7 +101,7 @@ function decodePortResponse(buf) {
   offset = offset + nodeLength;
   let elen = buf.readUInt16BE(offset);
   offset = offset + 2;
-  let extra = buf.slice(offset);
+  let extra = buf.slice(offset, elen);
 
   if(highestVersion < constants.LOWEST_VERSION) {
     throw new DecoderError('Highest protocol version returned lower than our lowest version');

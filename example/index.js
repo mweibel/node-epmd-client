@@ -1,7 +1,7 @@
 /**
  * Created by michael on 17.03.15.
  */
-"use strict";
+'use strict';
 
 let debug = require('debug')('node-epmd-client');
 let Server = require('./server');

@@ -3,7 +3,7 @@
  *
  * http://www.erlang.org/doc/man/epmd.html
  */
-"use strict";
+'use strict';
 
 let net = require('net');
 let EventEmitter = require('events').EventEmitter;

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 let net = require('net');
 let debug = require('debug')('node-epmd:server');
@@ -28,10 +28,9 @@ class Server {
       this.epmdClient.register(this.port, this.name);
     }.bind(this));
 
-    this.epmdClient.on('alive', function() {
-      // after register succeeds, call callback
-      cb && cb();
-    });
+    if(cb) {
+      this.epmdClient.on('alive', cb);
+    }
 
     // finally connect for real to epmd
     this.epmdClient.connect();
@@ -49,7 +48,7 @@ class Server {
       console.log(node.data.name + ' listens on port ' + node.data.port);
 
       // connect to the retrieved port
-      var sc = net.connect({
+      let sc = net.connect({
         host: host,
         port: node.data.port
       });

@@ -1,10 +1,11 @@
 /**
  * Encoder tests
  */
-"use strict";
+'use strict';
+
+require('chai').should();
 
 let mocha = require('mocha');
-let should = require('chai').should();
 let describe = mocha.describe;
 let it = mocha.it;
 
@@ -14,7 +15,7 @@ let constants = require('../protocol/constants');
 describe('encoder', function() {
   describe('#requestWrapper()', function() {
     it('should wrap a Buffer with it\'s length', function() {
-      let base = new Buffer("test", 'utf8');
+      let base = new Buffer('test', 'utf8');
       let wrap = encoder.requestWrapper(base);
 
       wrap.length.should.equal(base.length + 2);
@@ -26,7 +27,7 @@ describe('encoder', function() {
   describe('#aliveRequest()', function() {
     it('should create a valid ALIVE_REQ', function() {
       let port = 1;
-      let nodeName = "testing";
+      let nodeName = 'testing';
       let nodeLength = Buffer.byteLength(nodeName);
       let req = encoder.aliveRequest(port, nodeName);
 
@@ -45,7 +46,7 @@ describe('encoder', function() {
 
   describe('#portPleaseRequest()', function() {
     it('should create a valid PORT_PLEASE2_REQ', function() {
-      let nodeName = "testing";
+      let nodeName = 'testing';
       let nodeLength = Buffer.byteLength(nodeName);
       let req = encoder.portPleaseRequest(nodeName);
 
@@ -61,7 +62,7 @@ describe('encoder', function() {
 
       req.length.should.equal(1);
       req.readUInt8(0).should.equal(constants.NAMES_REQ);
-    })
+    });
   });
 
   describe('#dumpRequest()', function() {
@@ -80,5 +81,5 @@ describe('encoder', function() {
       req.length.should.equal(1);
       req.readUInt8(0).should.equal(constants.KILL_REQ);
     });
-  })
+  });
 });

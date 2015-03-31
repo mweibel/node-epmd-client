@@ -3,7 +3,7 @@
  *
  * @see http://www.erlang.org/doc/apps/erts/erl_dist_protocol.html
  */
-"use strict";
+'use strict';
 
 exports.KILL_REQ = 107;
 exports.DUMP_REQ = 100;

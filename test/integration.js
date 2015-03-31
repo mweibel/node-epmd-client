@@ -3,7 +3,7 @@
  *
  * Assumes a running EPMD
  */
-"use strict";
+'use strict';
 
 
 let mocha = require('mocha');

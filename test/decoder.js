@@ -1,7 +1,7 @@
 /**
  * Decoder tests
  */
-"use strict";
+'use strict';
 
 let mocha = require('mocha');
 let describe = mocha.describe;
@@ -74,7 +74,7 @@ describe('decoder', function() {
     describe('PORT2_RESP', function() {
       it('should decode a non-error response', function() {
         let port = 1337;
-        let nodeName = "testing";
+        let nodeName = 'testing';
         let buf = createPort2Resp(0, nodeName, port, constants.HIGHEST_VERSION, constants.LOWEST_VERSION);
 
         let actual = decoder.decode(buf);
@@ -88,7 +88,7 @@ describe('decoder', function() {
 
       it('should throw a DecoderError with an error response', function() {
         let port = 1337;
-        let nodeName = "testing";
+        let nodeName = 'testing';
         let buf = createPort2Resp(1, nodeName, port, constants.HIGHEST_VERSION, constants.LOWEST_VERSION);
 
         expect(function() {
@@ -98,21 +98,21 @@ describe('decoder', function() {
 
       it('should throw a DecoderError if highestVersion < LOWEST_VERSION', function() {
         let port = 1337;
-        let nodeName = "testing";
+        let nodeName = 'testing';
         let buf = createPort2Resp(0, nodeName, port, 0, constants.LOWEST_VERSION);
 
         expect(function() {
-          decoder.decode(buf)
+          decoder.decode(buf);
         }).to.throw();
       });
 
       it('should throw a DecoderError if lowestVersion > HIGHEST_VERSION', function() {
         let port = 1337;
-        let nodeName = "testing";
+        let nodeName = 'testing';
         let buf = createPort2Resp(0, nodeName, port, constants.HIGHEST_VERSION, 10);
 
         expect(function() {
-          decoder.decode(buf)
+          decoder.decode(buf);
         }).to.throw();
       });
     });
