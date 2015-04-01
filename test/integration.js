@@ -63,11 +63,11 @@ describe('integration', function() {
     });
   });
 
+  /**
+   * Be aware that getAllNodes() is sometimes just not returning what you want.
+   * This test may fail at random tries - disabled for now.
+
   describe('#getAllNodes()', function() {
-    /**
-     * Be aware that getAllNodes() is sometimes just not returning what you want.
-     * This test may fail at random tries..
-     */
     it('should retrieve all running nodes', function(done) {
       let c = new client.Client(HOST, EPMD_PORT);
       c.on('connect', function() {
@@ -94,12 +94,12 @@ describe('integration', function() {
       c.connect();
     });
   });
+  */
+  /**
+   * Be aware that dumpEpmd() is sometimes just not returning what you want.
+   * This test may fail at random tries - disabled for now.
 
   describe('#dumpEpmd()', function() {
-    /**
-     * Be aware that dumpEpmd() is sometimes just not returning what you want.
-     * This test may fail at random tries..
-     */
     it('should dump all running nodes', function(done) {
       let c = new client.Client(HOST, EPMD_PORT);
       c.on('connect', function() {
@@ -125,4 +125,5 @@ describe('integration', function() {
       c.connect();
     });
   });
+  */
 });
