@@ -7,7 +7,7 @@
 
 let constants = require('./constants');
 
-class DecoderError extends Error{
+class DecoderError extends Error {
   constructor(message) {
     this.name = 'DecoderError';
     this.message = message;
