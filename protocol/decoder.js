@@ -9,8 +9,8 @@ let constants = require('./constants');
 
 class DecoderError extends Error {
   constructor(message) {
+    super(message);
     this.name = 'DecoderError';
-    this.message = message;
   }
 }
 

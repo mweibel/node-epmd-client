@@ -26,6 +26,7 @@ class Client extends EventEmitter {
    * @param {int} port
    */
   constructor(host, port) {
+    super();
     this.host = host;
     this.port = port;
   }
