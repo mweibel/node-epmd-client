@@ -11,7 +11,7 @@
   "main": "index.js",
   "scripts": {
     "test": "eslint . && epmd -daemon && mocha test",
-    "test-coveralls": "eslint . && istanbul cover mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls"
+    "test-coveralls": "eslint . && istanbul cover mocha --report lcovonly -- -R spec test && cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "erlang",
