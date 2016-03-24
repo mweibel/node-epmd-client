@@ -3,9 +3,9 @@
  *
  * @see http://www.erlang.org/doc/apps/erts/erl_dist_protocol.html
  */
-'use strict';
+'use strict'
 
-let constants = require('./constants');
+let constants = require('./constants')
 
 /**
  * Each request should be preceeded by a two-byte length field.
@@ -19,13 +19,13 @@ let constants = require('./constants');
  * @param {Buffer} req
  * @returns {Buffer}
  */
-function requestWrapper(req) {
-  let baseLength = 2;
-  let buf = new Buffer(baseLength + req.length);
-  buf.writeUInt16BE(req.length, 0);
-  req.copy(buf, 2, 0);
+function requestWrapper (req) {
+  let baseLength = 2
+  let buf = new Buffer(baseLength + req.length)
+  buf.writeUInt16BE(req.length, 0)
+  req.copy(buf, 2, 0)
 
-  return buf;
+  return buf
 }
 
 /**
@@ -42,32 +42,32 @@ function requestWrapper(req) {
  * @param {string} nodeName
  * @returns {Buffer}
  */
-function aliveRequest(port, nodeName) {
-  let nodeLength = Buffer.byteLength(nodeName, 'utf8');
-  let baseLength = 13;
-  let req = new Buffer(nodeLength + baseLength);
+function aliveRequest (port, nodeName) {
+  let nodeLength = Buffer.byteLength(nodeName, 'utf8')
+  let baseLength = 13
+  let req = new Buffer(nodeLength + baseLength)
 
-  let offset = 0;
-  req.writeUInt8(constants.ALIVE_REQ, offset);
-  offset = 1;
-  req.writeUInt16BE(port, offset);
-  offset = 3;
-  req.writeUInt8(constants.NODE_TYPE_NORMAL, offset);
-  offset = 4;
-  req.writeUInt8(constants.PROTOCOL_IPV4, offset);
-  offset = 5;
-  req.writeUInt16BE(constants.HIGHEST_VERSION, offset);
-  offset = 7;
-  req.writeUInt16BE(constants.LOWEST_VERSION, offset);
-  offset = 9;
-  req.writeUInt16BE(nodeLength, offset);
-  offset = 11;
-  req.write(nodeName, offset, nodeLength, 'utf8');
-  offset = offset + nodeLength;
+  let offset = 0
+  req.writeUInt8(constants.ALIVE_REQ, offset)
+  offset = 1
+  req.writeUInt16BE(port, offset)
+  offset = 3
+  req.writeUInt8(constants.NODE_TYPE_NORMAL, offset)
+  offset = 4
+  req.writeUInt8(constants.PROTOCOL_IPV4, offset)
+  offset = 5
+  req.writeUInt16BE(constants.HIGHEST_VERSION, offset)
+  offset = 7
+  req.writeUInt16BE(constants.LOWEST_VERSION, offset)
+  offset = 9
+  req.writeUInt16BE(nodeLength, offset)
+  offset = 11
+  req.write(nodeName, offset, nodeLength, 'utf8')
+  offset = offset + nodeLength
   // Elen
-  req.writeUInt16BE(0, offset);
+  req.writeUInt16BE(0, offset)
 
-  return req;
+  return req
 }
 
 /**
@@ -83,15 +83,15 @@ function aliveRequest(port, nodeName) {
  * @param {string} nodeName
  * @returns {Buffer}
  */
-function portPleaseRequest(nodeName) {
-  let baseLength = 2;
-  let nameLength = Buffer.byteLength(nodeName, 'utf8') - 1;
-  let req = new Buffer(baseLength + nameLength);
-  let offset = 0;
-  req.writeUInt8(constants.PORT_PLEASE2_REQ, offset);
-  offset = 1;
-  req.write(nodeName, offset);
-  return req;
+function portPleaseRequest (nodeName) {
+  let baseLength = 2
+  let nameLength = Buffer.byteLength(nodeName, 'utf8') - 1
+  let req = new Buffer(baseLength + nameLength)
+  let offset = 0
+  req.writeUInt8(constants.PORT_PLEASE2_REQ, offset)
+  offset = 1
+  req.write(nodeName, offset)
+  return req
 }
 
 /**
@@ -105,10 +105,10 @@ function portPleaseRequest(nodeName) {
  *
  * @returns {Buffer}
  */
-function namesRequest() {
-  let req = new Buffer(1);
-  req.writeUInt8(constants.NAMES_REQ, 0);
-  return req;
+function namesRequest () {
+  let req = new Buffer(1)
+  req.writeUInt8(constants.NAMES_REQ, 0)
+  return req
 }
 
 /**
@@ -122,10 +122,10 @@ function namesRequest() {
  *
  * @returns {Buffer}
  */
-function dumpRequest() {
-  let req = new Buffer(1);
-  req.writeUInt8(constants.DUMP_REQ, 0);
-  return req;
+function dumpRequest () {
+  let req = new Buffer(1)
+  req.writeUInt8(constants.DUMP_REQ, 0)
+  return req
 }
 
 /**
@@ -139,10 +139,10 @@ function dumpRequest() {
  *
  * @returns {Buffer}
  */
-function killRequest() {
-  let req = new Buffer(1);
-  req.writeUInt8(constants.KILL_REQ, 0);
-  return req;
+function killRequest () {
+  let req = new Buffer(1)
+  req.writeUInt8(constants.KILL_REQ, 0)
+  return req
 }
 
 module.exports = {
@@ -152,4 +152,4 @@ module.exports = {
   namesRequest: namesRequest,
   dumpRequest: dumpRequest,
   killRequest: killRequest
-};
+}
