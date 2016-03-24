@@ -1,6 +1,5 @@
 language: node_js
-node_js:
-  - "iojs"
+node_js: 5.1.x
 sudo: required
 before_install:
   - sudo apt-get update -qq
