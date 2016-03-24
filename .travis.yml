@@ -8,7 +8,7 @@ before_install:
 script:
   - npm run lint
   - npm run coverage
-  - ls -lah .
+  - ls -lah coverage/
   - npm run coveralls
 cache:
   directories:
