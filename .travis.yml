@@ -8,4 +8,6 @@ before_install:
   - epmd -daemon
 script:
   - npm run lint
-  - npm run test-coveralls
+  - npm run coverage
+  - ls -lah .
+  - npm run coveralls

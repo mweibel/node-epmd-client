@@ -11,8 +11,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "standard",
-    "test": "standard && epmd -daemon && mocha test",
-    "test-coveralls": "istanbul cover mocha --report lcovonly -- -R spec test && cat ./coverage/lcov.info | coveralls -v"
+    "test": "npm run lint && epmd -daemon && mocha test",
+    "coverage": "istanbul cover mocha --report lcovonly -- -R spec test",
+    "coveralls": "cat ./coverage/lcov.info | coveralls -v"
   },
   "keywords": [
     "erlang",
